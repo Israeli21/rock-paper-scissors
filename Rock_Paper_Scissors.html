@@ -1,0 +1,130 @@
+<!-- Rock, Paper, Scissors Project: July 5, 2024  -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock, Paper, Scissors!</title>
+  </head>
+  <body>
+    <p>Rock, Paper, Scissors</p>
+
+    <!-- ROCK BUTTON ================================================-->
+    <button onclick = "
+      playGame('rock');
+    ">Rock</button>
+    
+    <!-- PAPER BUTTON ===============================================-->
+    <button onclick = "
+      playGame('paper');
+    ">Paper</button>
+
+    <!-- SCISSSORS BUTTON ===========================================-->
+    <button onclick = "
+      playGame('scissors');
+    ">Scissors</button>
+
+    <button onclick = "
+      score.wins = 0;
+      score.losses = 0;
+      score.ties = 0;
+      localStorage.removeItem('score');
+    ">Reset Score</button>
+
+    <!-- JAVASCRIPT =================================================-->
+    <script>
+      
+      let score = JSON.parse(localStorage.getItem('score')) || {
+          wins: 0,
+          losses: 0,
+          ties: 0
+        }
+
+      function playGame(playerMove) {
+        const computerMove = pickComputerMove();
+        let result = '';
+        
+        if (playerMove === 'scissors') {
+          if (computerMove === 'rock') {
+            result = 'You lose.';
+          } else if (computerMove === 'paper') {
+            result = 'You Win!';
+          } else if (computerMove === 'scissors'){
+            result = 'Tie.';
+          }
+
+        } else if (playerMove === 'paper') {
+          if (computerMove === 'rock') {
+            result = 'You Win!';
+          } else if (computerMove === 'paper') {
+            result = 'Tie.';
+          } else if (computerMove === 'scissors'){
+            result = 'You lose.';
+          }
+
+        } else if (playerMove === 'rock') {
+          if (computerMove === 'rock') {
+            result = 'Tie.';
+          } else if (computerMove === 'paper') {
+            result = 'You lose.';
+          } else if (computerMove === 'scissors'){
+            result = 'You Win!';
+          }
+        }
+
+        if (result === 'You Win!') {
+          score.wins += 1;
+        } else if (result === 'You lose.') {
+          score.losses += 1;
+        } else if (result === 'Tie.'){
+          score.ties += 1;
+        }
+
+        localStorage.setItem('score', JSON.stringify(score)); // localStorage only supports strings
+
+        alert(`You picked ${playerMove}. Computer picked ${computerMove}. ${result}
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+      }
+
+      function pickComputerMove() {
+        const randomNumber = Math.random();
+        let computerMove = '';
+        
+        if (randomNumber >= 0 && randomNumber < 1/3 ) {
+          computerMove = 'rock';
+        } else if (randomNumber >= 1/3 && randomNumber < 2/3){
+          computerMove = 'paper';
+        } else if (randomNumber >= 2/3 && randomNumber < 1){
+          computerMove = 'scissors';
+        }
+
+        return computerMove;
+      }
+
+    </script>
+  </body>
+</html>
+
+<!-- Notes: 
+
+Steps: When we click a button...
+  1) Computer Randomly selects amove
+  2) Compare the moves to get the result
+  3) Display the result ina popup
+
+Algorithm: a set of steps to solve a problem
+Math.random: generates a random number between 0 and 1
+
+Scope: A scope limits where a variable exists
+  - Any variable we create inside {...}, will only exist inside the {...}
+  - You must create variables that can CHANGE (let) before any if statements
+
+Functions: 
+  - Easier to update in the future (update in only one place)
+  - Return Statement: lets us get a value out of a function
+
+Returning a variable rather than a global variable is perferred since a scope
+can help us prevent naming conflicts
+
+Template Strings: have a unique features called multi-line strings
+null : intentially want something to be empty
+
+-->
