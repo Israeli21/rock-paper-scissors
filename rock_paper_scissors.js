@@ -129,3 +129,5 @@ function pickComputerMove() {
 
   return computerMove;
 }
+
+// Emojis: '.' + Windows Key

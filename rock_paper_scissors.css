@@ -1,8 +1,8 @@
 body{
-    background-color: rgb(25, 25, 25);
-    color: white;
-    font-family: Arial;
-  }
+  background-color: rgb(25, 25, 25);
+  color: white;
+  font-family: Arial;
+}
 
 .body-container{
   width: 100%;
@@ -28,6 +28,15 @@ body{
   border-radius: 60px;
   margin-right: 10px;
   cursor: pointer;
+}
+
+.move-button:hover{
+  background-color: rgb(50, 50, 50);
+  transition-duration: 0.3s;
+}
+
+.move-button:active{
+  background-color: rgb(120, 120, 120);
 }
 
 .result{
